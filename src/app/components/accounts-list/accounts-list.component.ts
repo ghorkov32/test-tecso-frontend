@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Select, Store} from '@ngxs/store';
+import {Observable} from 'rxjs';
+import {Account} from '../../models/account';
+import {GetAllAccountsAction} from '../../state/accounts/accounts.actions';
 
 @Component({
   selector: 'app-accounts-list',
@@ -7,9 +11,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountsListComponent implements OnInit {
 
-  constructor() { }
+  @Select(state => state.accounts.items) accounts$: Observable<Account[]>;
+
+  constructor(private store: Store) {
+  }
 
   ngOnInit() {
+    this.store.dispatch(new GetAllAccountsAction());
   }
 
 }

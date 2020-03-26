@@ -1,1 +1,17 @@
-<p>account works!</p>
+<mat-card class="mat-card">
+  <mat-card-header>
+    <mat-card-title>Cuenta #{{account.id}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <h3>Balance</h3>
+    <p><span>{{account.currency}}</span> {{account.balance}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="view()" mat-button>
+      <mat-icon aria-hidden="false" aria-label="Borrar cuenta">visibility</mat-icon>
+    </button>
+    <button (click)="delete()" mat-button>
+      <mat-icon aria-hidden="false" aria-label="Borrar cuenta">delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

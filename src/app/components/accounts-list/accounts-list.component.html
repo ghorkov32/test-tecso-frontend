@@ -1,1 +1,5 @@
-<p>accounts-list works!</p>
+<div class="card-list">
+  <div *ngFor="let account of (accounts$ | async)">
+    <app-account [account]="account"></app-account>
+  </div>
+</div>
