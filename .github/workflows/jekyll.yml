@@ -18,7 +18,7 @@ jobs:
         docker run \
         -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
         jekyll/builder:latest /bin/bash -c "chmod 777 /srv/jekyll && jekyll build --future"
-    - uses: colbyhill21/angular-full-ci@v1.0
     - name: Angular Full CI
+    - uses: colbyhill21/angular-full-ci@v1.0
       with: 
         testCommand: ng test
