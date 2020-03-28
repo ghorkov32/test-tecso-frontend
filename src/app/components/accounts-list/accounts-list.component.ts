@@ -12,6 +12,7 @@ import {GetAllAccountsAction} from '../../state/accounts/accounts.actions';
 export class AccountsListComponent implements OnInit {
 
   @Select(state => state.accounts.items) accounts$: Observable<Account[]>;
+  @Select(state => state.movements.accountId) selectedAccountId$: Observable<number>;
 
   constructor(private store: Store) {
   }

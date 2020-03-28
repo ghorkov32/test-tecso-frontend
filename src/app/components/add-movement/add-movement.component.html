@@ -1,1 +1,17 @@
-<p>add-movement works!</p>
+<h1 mat-dialog-title>Crear movimiento para cuenta #{{(account$ | async)?.id}}</h1>
+<div [formGroup]="movementForm" class="dialog-container" mat-dialog-content>
+  <mat-form-field class="description-field">
+    <mat-label>Descripción</mat-label>
+    <input formControlName="description" matInput>
+  </mat-form-field>
+  <mat-form-field class="amount-field">
+    <mat-label>Monto</mat-label>
+    <span matPrefix>{{(account$ | async)?.currency}} &nbsp;</span>
+    <input formControlName="amount" matInput type="number">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button (click)="onNoClick()" mat-button>Cancelar</button>
+  <button [disabled]="movementForm.invalid || movementForm.pristine" [mat-dialog-close]="data" mat-button>Crear</button>
+</div>
+

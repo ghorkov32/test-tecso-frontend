@@ -9,7 +9,6 @@ import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {AccountsState} from './state/accounts/accounts.state';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AccountComponent} from './components/account/account.component';
-import {MovementComponent} from './components/movement/movement.component';
 import {AccountsListComponent} from './components/accounts-list/accounts-list.component';
 import {MovementsListComponent} from './components/movements-list/movements-list.component';
 import {AccountsDashboardComponent} from './pages/accounts-dashboard/accounts-dashboard.component';
@@ -18,21 +17,24 @@ import {AddAccountComponent} from './components/add-account/add-account.componen
 import {
   MatButtonModule,
   MatCardModule,
+  MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
+  MatListModule,
   MatOptionModule,
   MatSelectModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatTableModule
 } from '@angular/material';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ApiErrorsInterceptor} from './interceptors/apierrors.interceptor.ts.service';
+import {MovementsState} from './state/movements/movements.state';
 
 @NgModule({
   declarations: [
     AppComponent,
     AccountComponent,
-    MovementComponent,
     AccountsListComponent,
     MovementsListComponent,
     AccountsDashboardComponent,
@@ -42,7 +44,7 @@ import {ApiErrorsInterceptor} from './interceptors/apierrors.interceptor.ts.serv
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    NgxsModule.forRoot([AccountsState]),
+    NgxsModule.forRoot([AccountsState, MovementsState]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     HttpClientModule,
@@ -54,14 +56,21 @@ import {ApiErrorsInterceptor} from './interceptors/apierrors.interceptor.ts.serv
     MatSelectModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatListModule,
+    MatDialogModule,
+    FormsModule,
+    MatTableModule
   ],
   providers: [HttpClientModule,
     {
       provide: HTTP_INTERCEPTORS, useClass: ApiErrorsInterceptor, multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    AddMovementComponent
+  ]
 })
 export class AppModule {
 }

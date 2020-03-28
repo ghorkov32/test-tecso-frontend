@@ -1,9 +1,9 @@
-import {Action, State, StateContext, Store} from '@ngxs/store';
+import {Action, createSelector, Selector, State, StateContext, Store} from '@ngxs/store';
 import {AddAccountAction, DeleteAccountAction, GetAccountAction, GetAllAccountsAction} from './accounts.actions';
 import {Account} from '../../models/account';
 import {AccountsService} from '../../services/accounts.service';
 import {tap} from 'rxjs/operators';
-import {MatSnackBar} from '@angular/material';
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import {NgZone} from '@angular/core';
 
 export class AccountsStateModel {
@@ -17,11 +17,24 @@ export class AccountsStateModel {
   }
 })
 export class AccountsState {
+  snackBarConfig = new MatSnackBarConfig();
 
   constructor(private accountsService: AccountsService,
               private store: Store,
               private snackBar: MatSnackBar,
               private zone: NgZone) {
+
+    this.snackBarConfig.duration = 3000;
+    this.snackBarConfig.horizontalPosition = 'center';
+    this.snackBarConfig.verticalPosition = 'bottom';
+  }
+
+  @Selector()
+  static account(id: number) {
+    return createSelector([AccountsState], (state: AccountsStateModel) => {
+      return state.items.find(a => a.id === id);
+    });
+
   }
 
   @Action(AddAccountAction)
@@ -29,7 +42,7 @@ export class AccountsState {
     return this.accountsService.addAccount(action.payload).pipe(tap((result) => {
       this.store.dispatch(new GetAllAccountsAction());
       this.zone.run(() => {
-        this.snackBar.open('Cuenta Corriente #' + result.id + ' creada');
+        this.snackBar.open('Cuenta Corriente creada', 'Descartar', this.snackBarConfig);
       });
     }));
   }
@@ -39,7 +52,7 @@ export class AccountsState {
     return this.accountsService.deleteAccount(action.payload).pipe(tap((result) => {
       this.store.dispatch(new GetAllAccountsAction());
       this.zone.run(() => {
-        this.snackBar.open('Cuenta Corriente #' + action.payload + ' eliminada');
+        this.snackBar.open('Cuenta Corriente #' + action.payload + ' eliminada', 'Descartar', this.snackBarConfig);
       });
     }));
   }

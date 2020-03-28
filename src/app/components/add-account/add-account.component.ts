@@ -3,6 +3,7 @@ import {PaymentType} from '../../enum/paymentType';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Store} from '@ngxs/store';
 import {AddAccountAction} from '../../state/accounts/accounts.actions';
+import {GetMovementsForAccountAction} from '../../state/movements/movements.actions';
 
 @Component({
   selector: 'app-add-account',
@@ -26,5 +27,7 @@ export class AddAccountComponent implements OnInit {
 
   createAccount() {
     this.store.dispatch(new AddAccountAction(this.accountForm.value));
+    this.store.dispatch(new GetMovementsForAccountAction(null));
+    this.accountForm.reset();
   }
 }

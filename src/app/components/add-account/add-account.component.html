@@ -21,6 +21,6 @@
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button (click)="createAccount()" mat-button>Crear</button>
+    <button (click)="createAccount()" [disabled]="accountForm.invalid || accountForm.pristine" mat-button>Crear</button>
   </mat-card-actions>
 </mat-card>
