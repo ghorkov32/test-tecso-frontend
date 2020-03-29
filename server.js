@@ -8,8 +8,9 @@ app.use(express.static(__dirname + '/dist/test-tecso-frontend'));
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname + '/dist/test-tecso-frontend/index.html'));
 });
-app.listen(80, function () {
-  console.log("Express server listening on port 80");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Our app is running on port ${PORT}`);
 });
 var proxy = httpProxy.createProxyServer({});
 app.all("*/api/*", function (req, res) {
