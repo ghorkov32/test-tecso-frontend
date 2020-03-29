@@ -1,27 +1,17 @@
 # TestTecsoFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.
+Proyecto de frontend realizado en Angular 8, para la challenge de Tecso. 
 
-## Development server
+## Acerca del proyecto
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+El proyecto se desarrolló usando Angular 8, Angular Material y NGXS (librería de state-management). Tiene incluida la configuración de server Node Express, con routeo al ambiente de producción, ubicado en https://sb-tecso-examen.herokuapp.com/api.
 
-## Code scaffolding
+## Build y deploy
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Para desarrollo local se precisa una instancia del backend, subido a [este repositorio](https://github.com/ghorkov32/-test-spring-boot-level-1).
+Una vez levantada la instancia local, ejecutando `ng serve` ya se puede desarrollar localmente.
+Para el deploy, una vez aprobada la Pull Request, este se hace automáticamente vía Heroku.
 
-## Build
+## Deploy de producción
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+El deploy de producción está ubicado en [https://sb-tecso-examen-front.herokuapp.com/](https://sb-tecso-examen-front.herokuapp.com/). Usa la api deployada también en Heroku.
