@@ -1,0 +1,5 @@
+<div class="card-list">
+  <div *ngFor="let account of (accounts$ | async)">
+    <app-account [account]="account" [selected]="account.id === (selectedAccountId$ | async)"></app-account>
+  </div>
+</div>

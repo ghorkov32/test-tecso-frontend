@@ -1,0 +1,18 @@
+<mat-card [ngClass]="{'selected-account': selected}" class="mat-card">
+  <mat-card-header>
+    <mat-card-title>Cuenta #{{account.id}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <h3>Balance</h3>
+    <p><span>{{account.currency}}</span>&nbsp;&nbsp;&nbsp;<span
+      [ngStyle]="{'color': account.balance >= 0 ? '#54B3A5':'#D94747'}">{{account.balance}}</span></p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="view()" mat-button>
+      <mat-icon aria-hidden="false" aria-label="Borrar cuenta">visibility</mat-icon>
+    </button>
+    <button (click)="delete()" mat-button>
+      <mat-icon aria-hidden="false" aria-label="Borrar cuenta">delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

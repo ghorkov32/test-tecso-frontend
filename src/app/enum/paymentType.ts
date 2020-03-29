@@ -1,5 +1,5 @@
 export enum PaymentType {
-  EUR,
-  USD,
-  ARS
+  EUR = 'EUR',
+  USD = 'USD',
+  ARS = 'ARS'
 }

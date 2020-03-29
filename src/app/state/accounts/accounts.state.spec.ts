@@ -1,14 +1,9 @@
 import {async, TestBed} from '@angular/core/testing';
 import {NgxsModule, Store} from '@ngxs/store';
-import {AccountsState, AccountsStateModel} from './accounts.state';
-import {AddAccountAction, DeleteAccountAction} from './accounts.actions';
-import {PaymentType} from '../../enum/paymentType';
-import {Account} from '../../models/account';
+import {AccountsState} from './accounts.state';
 import {HttpClient} from '@angular/common/http';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {MovementsState} from '../movements/movements.state';
 import {AccountsService} from '../../services/accounts.service';
-import {of} from 'rxjs';
 
 describe('Accounts actions', () => {
   let store: Store;
@@ -34,7 +29,6 @@ describe('Accounts actions', () => {
     store.dispatch(new AddAccountAction(payload));
     spyOn(accountsService, 'fetchAccounts').and.returnValue(of([payload]));
     store.select(state => state.accounts.items).subscribe((items: Account[]) => {
-      console.log(items);
       expect(items.length).toEqual(1);
     });
   });*/

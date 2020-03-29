@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Account} from '../models/account';
@@ -16,7 +16,7 @@ export class AccountsService {
   }
 
   deleteAccount(id: number) {
-    return this.http.delete(environment.apiUrl + '/accounts' + id);
+    return this.http.delete(environment.apiUrl + '/accounts/' + id);
   }
 
   addAccount(payload: Account) {

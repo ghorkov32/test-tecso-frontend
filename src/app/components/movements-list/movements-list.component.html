@@ -1,0 +1,31 @@
+<div *ngIf="(selectedAccountId$ | async)" class="list-container">
+  <div class="title-container">
+    <h2>Lista de movimientos</h2>
+    <button (click)="close()" mat-button>
+      <mat-icon aria-hidden="false" aria-label="Borrar cuenta">close</mat-icon>
+    </button>
+  </div>
+  <p *ngIf="!(movements$ | async) || (movements$ | async).length == 0">La cuenta no registra movimientos</p>
+  <button (click)="add()" mat-button>
+    <mat-icon aria-hidden="false" aria-label="Borrar cuenta">add</mat-icon>
+    Agregar movimiento
+  </button>
+  <table [dataSource]="(movements$ | async)" class="mat-elevation-z8" mat-table>
+    <ng-container matColumnDef="date">
+      <th *matHeaderCellDef mat-header-cell> Fecha</th>
+      <td *matCellDef="let element" mat-cell> {{element.date | date: 'dd/MM/yyyy HH:mm:ss'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th *matHeaderCellDef mat-header-cell> Descripción</th>
+      <td *matCellDef="let element" mat-cell> {{element.description}} </td>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+      <th *matHeaderCellDef mat-header-cell> Monto</th>
+      <td *matCellDef="let element" mat-cell><span
+        [ngStyle]="{'color': element.amount >= 0 ? '#54B3A5':'#D94747'}">{{element.amount | currency}}</span></td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  </table>
+</div>
