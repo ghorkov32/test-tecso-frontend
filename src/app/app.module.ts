@@ -28,43 +28,61 @@ import {
   MatTableModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {ApiErrorsInterceptor} from './interceptors/apierrors.interceptor.ts.service';
+import {ApiInterceptor} from './interceptors/apierrors.interceptor.ts.service';
 import {MovementsState} from './state/movements/movements.state';
+import {environment} from '../environments/environment';
+
+const MAT_MODULES = [
+  MatCardModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatOptionModule,
+  MatSelectModule,
+  ReactiveFormsModule,
+  MatButtonModule,
+  MatSnackBarModule,
+  MatListModule,
+  MatDialogModule,
+  MatTableModule
+];
+
+const NGXS_MODULES = [
+  NgxsModule.forRoot([AccountsState, MovementsState]),
+  NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
+  NgxsLoggerPluginModule.forRoot({disabled: environment.production}),
+];
+
+const ANGULAR_MODULES = [
+  FormsModule,
+  BrowserModule,
+  BrowserAnimationsModule,
+  HttpClientModule,
+];
+
+const COMPONENTS = [
+  AppComponent,
+  AccountComponent,
+  AccountsListComponent,
+  MovementsListComponent,
+  AccountsDashboardComponent,
+  AddMovementComponent,
+  AddAccountComponent
+];
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AccountComponent,
-    AccountsListComponent,
-    MovementsListComponent,
-    AccountsDashboardComponent,
-    AddMovementComponent,
-    AddAccountComponent
+    COMPONENTS
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    NgxsModule.forRoot([AccountsState, MovementsState]),
-    NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsLoggerPluginModule.forRoot(),
-    HttpClientModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatOptionModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatListModule,
-    MatDialogModule,
-    FormsModule,
-    MatTableModule
+    ANGULAR_MODULES,
+    MAT_MODULES,
+    NGXS_MODULES,
   ],
   providers: [HttpClientModule,
     {
-      provide: HTTP_INTERCEPTORS, useClass: ApiErrorsInterceptor, multi: true
+      provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true
     }
   ],
   bootstrap: [AppComponent],

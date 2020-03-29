@@ -35,7 +35,6 @@ export class AddMovementComponent implements OnInit {
     this.account$ = this.store.select(state => state.movements.accountId)
       .pipe(concatMap(accountId => this.store.select(s => s.accounts.items)
         .pipe(map((res: Account[]) => {
-          console.log(res);
           return res.find(r => r.id === accountId);
         })))
       );

@@ -1,12 +1,11 @@
-import { TestBed, async } from '@angular/core/testing';
-import { NgxsModule, Store } from '@ngxs/store';
-import { MovementsState } from './movements.state';
+import {async, TestBed} from '@angular/core/testing';
+import {NgxsModule, Store} from '@ngxs/store';
+import {MovementsState} from './movements.state';
 import {AddMovementAction} from './movements.actions';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {HttpClient} from '@angular/common/http';
 import {Movement} from '../../models/movement';
 import {of} from 'rxjs';
-import {AccountsService} from '../../services/accounts.service';
 import {MovementsService} from '../../services/movements.service';
 
 describe('Movements actions', () => {
@@ -32,7 +31,6 @@ describe('Movements actions', () => {
     spyOn(movementsService, 'addMovement').and.returnValue(of(payload));
     store.dispatch(new AddMovementAction(1, payload));
     store.select(state => state.movements.items).subscribe((items: Movement[]) => {
-      console.log(items);
       expect(items.length).toEqual(1);
     });
   });
