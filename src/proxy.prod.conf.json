@@ -1,0 +1,11 @@
+{
+  "/api/*": {
+    "target": "https://sb-tecso-examen.herokuapp.com/",
+    "secure": false,
+    "logLevel": "error",
+    "pathRewrite": {
+      "^/api": "https://sb-tecso-examen.herokuapp.com/api"
+    },
+    "changeOrigin": true
+  }
+}
